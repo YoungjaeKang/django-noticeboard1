@@ -1,3 +1,22 @@
 from django.db import models
+from django.utils import timezone
 
-# Create your models here.
+class Post(models.Model):
+    title = models.CharField(max_length=50, null=True)
+    contents = models.TextField(null=True)
+    writer = models.CharField(max_length=30, null=True)
+    created = models.DateField(null=True)
+    # category tag로 코딩
+    # photo = models.ImageField()
+    
+    def __str__(self):
+        return self.title
+
+class Member(models.Model):
+    name = models.CharField(max_length=50, null=True)
+    loginId = models.CharField(max_length=50, null=True)
+    loginPw = models.CharField(max_length=50, null=True)    # pw filed로 바꾸기
+    email = models.EmailField(max_length=50, null=True)
+
+    def __str__(self):
+        return self.name
