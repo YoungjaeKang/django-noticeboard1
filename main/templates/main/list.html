@@ -25,6 +25,25 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="container">
+        <ul class="nav justify-content-center">
+            {% if postAll.has_previous %}
+            <a href="?page=1">처음으로</a>
+            <a href="?page={{postAll.previous_page_number}}">이전으로</a>
+            {% endif %}
+            <span>{{postAll.number}}</span>
+            <span>/</span>
+            <span>{{postAll.paginator.num_pages}}</span>
+
+            {% if postAll.has_next %}
+            <a href="?page={{postAll.next_page_number}}">다음으로</a>
+            <a href="?page={{postAll.paginator.num_pages}}">맨 뒤로</a>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="containter">
+        <button type="button" class="btn btn-primary" href="#">글쓰기</button>
+    <div>
 </div>
 
 {% endblock %}
