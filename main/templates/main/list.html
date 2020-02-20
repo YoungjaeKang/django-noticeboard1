@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         {% for post in postAll %}
-            <tr>
+            <tr style = "cursor:pointer;" onClick = " location.href='{% url 'post-detail' id=post.id %}' ">
                 <td height=100px>{{post.id}}</td>
                 <td>{{post.title}}</td>
                 <td>{{post.contents}}</td>

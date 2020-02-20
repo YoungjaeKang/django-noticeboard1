@@ -1,8 +1,10 @@
 from django.forms import ModelForm
 from django import forms
-from third.models import Restaurant, Review
+from main.models import Post, Membr
 from django.utils.translation import gettext_lazy as _
 
+
+# TODO: 어떻게 하면 detail, create, update form을 통일할 수 있을까?
 
 class RestaurantForm(ModelForm):
     class Meta:

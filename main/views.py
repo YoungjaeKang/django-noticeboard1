@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from main.models import Post, Member
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
@@ -35,9 +35,13 @@ def create(request):
     # return render(request, 'third/create.html', {'form':form})
     pass
 
-def detail(request):
+def detail(request, id):
     # TODO: 게시물 찍고 들어갔을 때 상세 화면 구현
-    pass
+    if 'id' is not None:
+        item = get_object_or_404(Post, pk=id)
+        # reviews = Review.objects.filter(restaurant=item).all()
+        return render(request, 'main/detail.html', {'item': item})
+    return HttpResponseRedirect('main/list/')
 
 
 def delete(request):
