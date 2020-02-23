@@ -1,13 +1,24 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from main.models import Post, Member
-from main.forms import PostForm
+from main.forms import PostForm, MemberForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
+
 
 def login(request):
     # TODO: Member를 통한 Login 기능 구현
     # TODO: 회원가입 기능 구현
     return render(request, 'main/login.html')
+
+
+def join(request):
+    if request.method == 'POST':
+        form = MemberForm(request.POST)
+        if form.is_valid():
+            new_item = form.save()
+        return HttpResponseRedirect('/main/list/')
+    form = MemberForm()
+    return render(request, 'main/join.html', {'form':form})
 
 
 def board(request):

@@ -8,5 +8,5 @@ urlpatterns = [
     path('board/', views.board, name="board"),
     path('post/<int:id>', views.detail, name='post-detail'),
     path('create/', views.create, name='create'),
-
+    path('join/', views.join, name='join'),
 ]

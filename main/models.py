@@ -6,7 +6,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100, null=True)
     contents = models.TextField(null=True)
     writer = models.CharField(max_length=30, null=True)
-    created = models.DateField(default=datetime.now(), null=True)
+    created = models.DateField(default=timezone.now(), null=True)
     # category tag로 코딩
     # photo = models.ImageField()
     
