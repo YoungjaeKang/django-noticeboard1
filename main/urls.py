@@ -7,4 +7,6 @@ urlpatterns = [
     path('list/', views.list, name="list"),
     path('board/', views.board, name="board"),
     path('post/<int:id>', views.detail, name='post-detail'),
+    path('create/', views.create, name='create'),
+
 ]

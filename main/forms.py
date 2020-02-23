@@ -1,38 +1,35 @@
 from django.forms import ModelForm
 from django import forms
-from main.models import Post, Membr
+from main.models import Post, Member
 from django.utils.translation import gettext_lazy as _
 
 
 # TODO: 어떻게 하면 detail, create, update form을 통일할 수 있을까?
 
-class RestaurantForm(ModelForm):
+class PostForm(ModelForm):
     class Meta:
-        model = Restaurant
-        fields = ['name', 'address', 'image', 'password']
+        model = Post
+        fields = [
+            'title',
+            'contents',
+            'writer',
+            'created',
+        ]
         labels = {
-            'name': _('이름'),
-            'address': _('주소'),
-            'image': _('이미지 url'),
-            'password': _('게시물 비밀번호')
+            'title': _('제목'),
+            'contents': _('내용'),
+            'writer': _('작성자'),
+            # TODO: 작성자에는 로그인한 사람이 와야 한다.
         }
-        help_texts = {
-            'name': _('이름을 입력해 주세요.'),
-            'address': _('주소를 입력해 주세요.'),
-            'image': _('이미지의 url을 입력해 주세요.'),
-            'password': _('게시물의 비밀번호를 입력해 주세요.')
-        }
-        widgets = {
-            'password': forms.PasswordInput()
-        }
+        # help_texts = {
+        #     'title': _('제목을 입력해 주세요.'),
+        #     'contents': _('내용을 입력해 주세요.'),
+        # }
         error_messages = {
-            'name': {
-                'max_length': _('이름이 너무 길어요. 30자 이하로 해주세요.')
+            'title': {
+                'max_length': _('제목이 너무 길어요. 50자 이하로 해주세요.')
             },
-            'image': {
-                'max_length': _('이미지 주소가 너무 길어요. 500자 이하로 해주세요.')
-            },
-            'password': {
-                'max_length': _('비밀번호가 너무 길어요. 20자 이하로 해주세요.')
+            'contents': {
+                'max_length': _('내용이 너무 길어요. 500자 이하로 해주세요.')
             },
         }

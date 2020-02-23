@@ -3,14 +3,15 @@
 {% load static %}
 {% block content %}
 <div class="container">
+    <h4 class="mt-4">게시판</h4>
     <table class="table table-hover">
         <thead>
             <tr>
-                <th width=70px>번호</th>
+                <th width=70px>#</th>
                 <th width=300px>제목</th>
                 <th width=500px>내용</th>
-                <th width=150px>날짜</th>
-                <th width=150px>작성자</th>
+                <th width=150px>작성자</th>
+                <th width=150px>날짜</th>
             </tr>
         </thead>
         <tbody>
@@ -19,8 +20,8 @@
                 <td height=100px>{{post.id}}</td>
                 <td>{{post.title}}</td>
                 <td>{{post.contents}}</td>
-                <td>{{post.created}}</td>
                 <td>{{post.writer}}</td>
+                <td>{{post.created}}</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -40,10 +41,10 @@
             <a href="?page={{postAll.paginator.num_pages}}">맨 뒤로</a>
             {% endif %}
         </ul>
+        <div class="containter text-right">
+            <button type="button" class="btn btn-secondary" onClick = " location.href='{% url 'create' %}' ">글쓰기</button>
+        <div>
     </div>
-    <div class="containter">
-        <button type="button" class="btn btn-primary" href="#">글쓰기</button>
-    <div>
 </div>
 
 {% endblock %}

@@ -6,20 +6,19 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12" style="margin-top:20px;">
-            <h3>{{ item.title }}</h3>
-            <p>
-                {{ item.id }}
-            </p>
+            <h4>#{{ item.id }} {{ item.title }}</h4>
+            <hr>
             <p>
                 {{ item.contents }}
             </p>
-            <p>
-                {{ item.created }}
-            </p>
-            <p>
+            <p class="text-right">
+                <br>
+                <br>
                 {{ item.writer }}
             </p>
-            
+            <p class="text-right">
+                {{ item.created }}
+            </p>
             <p>
                 {% comment %} <a href="{% url 'restaurant-delete' id=item.id %}">
                     <button class="btn btn-danger">삭제하기</button>

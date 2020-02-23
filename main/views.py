@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from main.models import Post, Member
+from main.forms import PostForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 
@@ -26,14 +27,13 @@ def list(request):
 
 
 def create(request):
-    # if request.method == 'POST':
-    #     form = RestaurantForm(request.POST)
-    #     if form.is_valid():
-    #         new_item = form.save()
-    #     return HttpResponseRedirect('/third/list/')
-    # form = RestaurantForm()
-    # return render(request, 'third/create.html', {'form':form})
-    pass
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            new_item = form.save()
+        return HttpResponseRedirect('/main/list/')
+    form = PostForm()
+    return render(request, 'main/create.html', {'form':form})
 
 def detail(request, id):
     # TODO: 게시물 찍고 들어갔을 때 상세 화면 구현

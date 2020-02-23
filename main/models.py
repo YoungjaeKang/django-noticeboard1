@@ -1,11 +1,12 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
 
 class Post(models.Model):
-    title = models.CharField(max_length=50, null=True)
+    title = models.CharField(max_length=100, null=True)
     contents = models.TextField(null=True)
     writer = models.CharField(max_length=30, null=True)
-    created = models.DateField(null=True)
+    created = models.DateField(default=datetime.now(), null=True)
     # category tag로 코딩
     # photo = models.ImageField()
     
