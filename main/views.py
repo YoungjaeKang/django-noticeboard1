@@ -5,9 +5,13 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 
 
+def index(request):
+    return render(request, 'main/index.html')
+
 def login(request):
-    # TODO: Member를 통한 Login 기능 구현
-    # TODO: 회원가입 기능 구현
+
+
+
     return render(request, 'main/login.html')
 
 

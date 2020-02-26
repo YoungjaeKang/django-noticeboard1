@@ -6,6 +6,14 @@ from django.utils.translation import gettext_lazy as _
 
 
 # TODO: 어떻게 하면 detail, create, update form을 통일할 수 있을까?
+class LoginForm(ModelForm):
+    class Meta:
+        model = Member
+        fields = [
+            'loginId',
+            'loginPw',
+        ]
+
 
 class MemberForm(ModelForm):
     # TODO: 비밀번호 일치 확인 기능 넣기
