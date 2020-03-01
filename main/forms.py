@@ -7,34 +7,34 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.hashers import check_password
 
-class LoginForm(forms.Form):
-    email = forms.EmailField()
-    password = forms.CharField(widget=forms.PasswordInput())
+# class LoginForm(forms.Form):
+#     email = forms.EmailField()
+#     password = forms.CharField(widget=forms.PasswordInput())
 
-    def clean(self):
-        email = self.cleaned_data.get("email")
-        password = self.cleaned_data.get("loginPw")
-        try:
-            user = models.Member.objects.get(email=email)
-            if user.check_password(password):
-                return self.cleaned_data
-            else:
-                self.add_error("password", forms.ValidationError("Password is wrong"))
+#     def clean(self):
+#         email = self.cleaned_data.get("email")
+#         password = self.cleaned_data.get("loginPw")
+#         try:
+#             user = models.Member.objects.get(email=email)
+#             if user.check_password(password):
+#                 return self.cleaned_data
+#             else:
+#                 self.add_error("password", forms.ValidationError("Password is wrong"))
 
-        except models.Member.DoesNotExist:
-            self.add_error("email",forms.ValidationError("User does not exist"))
+#         except models.Member.DoesNotExist:
+#             self.add_error("email",forms.ValidationError("User does not exist"))
 
-# class LoginForm(ModelForm):
-#     class Meta:
-#         model = Member
-#         fields = [
-#             'email',
-#             'loginPw',
-#         ]
-#         labels = {
-#             'email': _('email'),
-#             'password': _('password'),
-#         }
+class LoginForm(ModelForm):
+    class Meta:
+        model = Member
+        fields = [
+            'email',
+            'loginPw',
+        ]
+        labels = {
+            'email': _('email'),
+            'loginPw': _('password'),
+        }
 
 
 class MemberForm(ModelForm):
