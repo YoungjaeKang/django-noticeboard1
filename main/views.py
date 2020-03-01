@@ -39,7 +39,7 @@ def index(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('home')
+    return redirect('index')
 
 
 def login(request):
@@ -51,7 +51,7 @@ def login(request):
             auth.login(request, user)
             return redirect('index')
         else:
-            messages.add_message(request, messages.INFO, 'username or password is incorrect')
+            messages.add_message(request, messages.INFO, '아이디 또는 비밀번호가 일치하지 않습니다.')
             return render(request, 'main/login.html')
     else:
         return render(request, 'main/login.html')
@@ -75,17 +75,24 @@ def login(request):
 
 
 def join(request):
+    # TODO: 아이디 중복 여부 검토 넣어야 한다.
     if request.method == "POST":
-        if request.POST["password1"] == request.POST["password2"]:
-            user = User.objects.create_user(
-                username=request.POST["username"], password=request.POST["password1"],
-            )
-            auth.login(request, user)
-            return redirect('index')
+        if request.POST["username"] != "" and request.POST["password1"] != "":
+            if request.POST["password1"] == request.POST["password2"]:
+                user = User.objects.create_user(
+                    username=request.POST["username"], password=request.POST["password1"],
+                )
+                auth.login(request, user)
+                return redirect('index')
+            else:
+                messages.add_message(request, messages.INFO, '비밀번호가 일치하지 않습니다.')
+                return render(request, 'main/join.html', )
         else:
-            messages.add_message(request, messages.INFO, '비밀번호가 일치하지 않습니다.')
-            return render(request, 'main/join.html', )
+            messages.add_message(request, messages.INFO, '모든 필드를 입력해 주세요.')
+            return render(request, 'main/join.html')
     return render(request, 'main/join.html')
+        
+
 
 
 # def join(request):

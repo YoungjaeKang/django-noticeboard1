@@ -25,7 +25,26 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'board' %}">통계</a>
             </li>
-          </ul>
+            {% if user.is_authenticated %}
+            </ul>
+            <div class="container">
+              <span class="text-monospace font-italic">Welcome, {{ user.username }}.</span>
+              <form class="form-inline">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </form>
+            </div>
+            {% else %}
+            </ul>
+            <div class="container">
+              <span class="text-monospace font-italic">Welcome, Guest.</span>
+              <form class="form-inline">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link" href="{% url 'join' %}">Join</a>
+              </form>
+            </div>
+            {% endif %}
+        </div>
+        <div>
         </div>
     </nav>
     {% block content %}

@@ -5,6 +5,12 @@
 
 <div class="container mt-4">
     index
+
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+    {% else %}
+    <p>Welcome, Guest. Please log in.</p>
+    {% endif %}
 </div>
 
 {% endblock %}
