@@ -15,9 +15,9 @@ class Post(models.Model):
 
 class Member(models.Model):
     name = models.CharField(max_length=50, null=True)
-    loginId = models.CharField(max_length=50, null=True)
-    loginPw = models.CharField(max_length=50, null=True)    # pw filed로 바꾸기
+    # loginId = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=50, null=True)
+    loginPw = models.CharField(max_length=50, null=True)    # pw filed로 바꾸기
 
     def __str__(self):
         return self.name

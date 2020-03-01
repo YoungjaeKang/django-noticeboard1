@@ -14,7 +14,7 @@ class PostAdmin(admin.ModelAdmin):
 class MemberAdmin(admin.ModelAdmin):
     list_display = (
         'name',
-        'loginId',
+        # 'loginId',
         'loginPw',
         'email',
     )

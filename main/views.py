@@ -1,18 +1,52 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from main.models import Post, Member
-from main.forms import PostForm, MemberForm
+from main.forms import PostForm, MemberForm, LoginForm
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
+from django.contrib.auth import login, authenticate
+from django.http import HttpResponseRedirect, HttpResponse
+
+from django.views import View
+from django.views.generic import FormView
+from . import forms, models
+from django.urls import reverse_lazy
 
 
 def index(request):
     return render(request, 'main/index.html')
 
-def login(request):
+class LoginView(FormView):
+    """ Full Django Login """
+    template_name = "main/login.html"
+    form_class = forms.LoginForm
+    success_url = reverse_lazy("list")
+    # initial = {
+    #     'email': "hyunjin@naver.com"
+    # }
 
+    def form_valid(self, form):
+        email = form.cleaned_data.get("email")
+        password = form.cleaned_data.get("loginPw")
+        user = authenticate(self.request, username=email, password=password)
+        if user is not None:
+            login(self.request, user)
+        return super().form_valid(form)
 
-
-    return render(request, 'main/login.html')
+# def signin(request):
+#     if request.method == "POST":
+#         form = LoginForm(request.POST)
+#         # loginId = request.POST['loginId']
+#         email = request.POST['email']
+#         loginPw = request.POST['loginPw']
+#         user = authenticate(username=email, password=loginPw)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('index')
+#         else:
+#             return HttpResponse('로그인 실패. 다시 시도해 보세요.')
+#     else:
+#         form = LoginForm()
+#         return render(request, 'main/login.html', {'form': form})
+#     # return render(request, 'main/login.html')
 
 
 def join(request):

@@ -1,18 +1,40 @@
 from django.forms import ModelForm
 from django import forms
+from . import models
 from main.models import Post, Member
 from django.utils.translation import gettext_lazy as _
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.hashers import check_password
 
+class LoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput())
 
-# TODO: 어떻게 하면 detail, create, update form을 통일할 수 있을까?
-class LoginForm(ModelForm):
-    class Meta:
-        model = Member
-        fields = [
-            'loginId',
-            'loginPw',
-        ]
+    def clean(self):
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("loginPw")
+        try:
+            user = models.Member.objects.get(email=email)
+            if user.check_password(password):
+                return self.cleaned_data
+            else:
+                self.add_error("password", forms.ValidationError("Password is wrong"))
+
+        except models.Member.DoesNotExist:
+            self.add_error("email",forms.ValidationError("User does not exist"))
+
+# class LoginForm(ModelForm):
+#     class Meta:
+#         model = Member
+#         fields = [
+#             'email',
+#             'loginPw',
+#         ]
+#         labels = {
+#             'email': _('email'),
+#             'password': _('password'),
+#         }
 
 
 class MemberForm(ModelForm):
@@ -21,18 +43,16 @@ class MemberForm(ModelForm):
         model = Member
         fields = [
             'name',
-            'loginId',
-            'loginPw',
             'email',
+            'loginPw',
         ]
         widgets = {
             'loginPw': forms.PasswordInput()
         }
         labels = {
-            'name': _('이름'),
-            'loginId': _('아이디'),
-            'loginPw': _('비밀번호'),
-            'email': _('이메일'),
+            'name': _('username'),
+            'loginPw': _('password'),
+            'email': _('email'),
         }
 
 class PostForm(ModelForm):
