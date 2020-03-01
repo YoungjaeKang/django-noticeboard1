@@ -13,6 +13,8 @@ from django.views.generic import FormView
 from . import forms, models
 from django.urls import reverse_lazy
 
+from django.contrib import messages
+
 
 def index(request):
     return render(request, 'main/index.html')
@@ -36,7 +38,8 @@ def index(request):
 
 
 def logout(request):
-    pass
+    auth.logout(request)
+    return redirect('home')
 
 
 def login(request):
@@ -48,11 +51,8 @@ def login(request):
             auth.login(request, user)
             return redirect('index')
         else:
-            return render(
-                request,
-                'main/login.html',
-                {'error_message':'username or password is incorrect'},
-            )
+            messages.add_message(request, messages.INFO, 'username or password is incorrect')
+            return render(request, 'main/login.html')
     else:
         return render(request, 'main/login.html')
 
@@ -82,7 +82,9 @@ def join(request):
             )
             auth.login(request, user)
             return redirect('index')
-        return render(request, 'main/join.html', )
+        else:
+            messages.add_message(request, messages.INFO, '비밀번호가 일치하지 않습니다.')
+            return render(request, 'main/join.html', )
     return render(request, 'main/join.html')
 
 

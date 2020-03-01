@@ -5,7 +5,16 @@
 
 <div class="container mt-4">
     <h4 class="mb-4">회원가입</h4>
-    
+    {% if messages %}
+        {% csrf_token %}
+        <div class="messages">
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>
+                    {{ message.message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %} 
     <form method="POST" action="{% url 'join' %}">
         {% csrf_token %}
         Username:
