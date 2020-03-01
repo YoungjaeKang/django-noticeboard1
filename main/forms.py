@@ -24,36 +24,37 @@ from django.contrib.auth.hashers import check_password
 #         except models.Member.DoesNotExist:
 #             self.add_error("email",forms.ValidationError("User does not exist"))
 
-class LoginForm(ModelForm):
-    class Meta:
-        model = Member
-        fields = [
-            'email',
-            'loginPw',
-        ]
-        labels = {
-            'email': _('email'),
-            'loginPw': _('password'),
-        }
+# class LoginForm(ModelForm):
+#     class Meta:
+#         model = Member
+#         fields = [
+#             'email',
+#             'password',
+#             'password2'
+#         ]
+#         labels = {
+#             'email': _('email'),
+#             'loginPw': _('password'),
+#         }
 
 
-class MemberForm(ModelForm):
-    # TODO: 비밀번호 일치 확인 기능 넣기
-    class Meta:
-        model = Member
-        fields = [
-            'name',
-            'email',
-            'loginPw',
-        ]
-        widgets = {
-            'loginPw': forms.PasswordInput()
-        }
-        labels = {
-            'name': _('username'),
-            'loginPw': _('password'),
-            'email': _('email'),
-        }
+# class MemberForm(ModelForm):
+#     # TODO: 비밀번호 일치 확인 기능 넣기
+#     class Meta:
+#         model = Member
+#         fields = [
+#             'name',
+#             'email',
+#             'loginPw',
+#         ]
+#         widgets = {
+#             'loginPw': forms.PasswordInput()
+#         }
+#         labels = {
+#             'name': _('username'),
+#             'loginPw': _('password'),
+#             'email': _('email'),
+#         }
 
 class PostForm(ModelForm):
     class Meta:
