@@ -22,3 +22,10 @@ class Member(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Review(models.Model):
+    comment = models.CharField(max_length=300)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    created = models.DateField(default=timezone.now(), null=True)

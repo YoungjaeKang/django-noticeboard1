@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from . import models
-from main.models import Post, Member
+from main.models import Post, Member, Review
 from django.utils.translation import gettext_lazy as _
 
 from django.contrib.auth.forms import UserCreationForm
@@ -78,4 +78,24 @@ class PostForm(ModelForm):
             'contents': {
                 'max_length': _('내용이 너무 길어요. 500자 이하로 해주세요.')
             },
+        }
+
+
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = [
+            'comment',
+            'post',
+        ]
+        labels = {
+            'comment':_('comment'),
+        }
+
+        help_texts = {
+            'comment':_('Comment Please!!'),
+        }
+
+        widgets = {
+            'post': forms.HiddenInput(),
         }

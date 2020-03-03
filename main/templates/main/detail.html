@@ -32,6 +32,16 @@
             </p>
         </div>
     </div>
+    <div class="container">
+    <form action="{% url 'review-create' post_id=item.id %}" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">등록</button>
+    </form>
+    {{ item.comment }}
+    </div>
 </div>
 
 {% endblock %}

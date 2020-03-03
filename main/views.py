@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from main.models import Post, Member
-from main.forms import PostForm
+from main.models import Post, Member, Review
+from main.forms import PostForm, ReviewForm
 from django.core.paginator import Paginator
 from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect, HttpResponse
@@ -149,3 +149,16 @@ def update(request):
     # TODO: 게시물 찍고 들어갔을 때 수정 기능 구현
     # TODO: 게시글 지우거나 수정할 때 비밀번호 입력
     pass
+
+
+def review_create(request, post_id):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            new_item = form.save()
+        return redirect('post-detail', id=post_id)
+    
+    item = get_object_or_404(Post, pk=post_id)
+    form = ReviewForm(initial={'post': item})
+
+    return render(request, 'post-detail', {'form':form, 'item':item})
