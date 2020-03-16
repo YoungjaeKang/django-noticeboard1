@@ -4,8 +4,14 @@ from django.db import models
 from django.utils import timezone
 from datetime import datetime
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+# from django.contrib.auth.models import User
+
+
 
 class Post(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
     title = models.CharField(max_length=100, null=True)
     contents = models.TextField(null=True)
     writer = models.CharField(max_length=30, null=True)

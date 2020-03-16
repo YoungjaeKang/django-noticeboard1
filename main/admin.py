@@ -44,5 +44,13 @@ class MemberAdmin(admin.ModelAdmin):
         'email',
     )
 
+
+# class ReviewAdmin(admin.ModelAdmin):
+#     list_display = (
+#         'comment',
+#     )
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Member, MemberAdmin)
+# admin.site.register(Review, MemberAdmin)

@@ -34,16 +34,24 @@ MESSAGE_LEVEL = messages_constants.DEBUG
 # Application definition
 
 INSTALLED_APPS = [
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third apps
+    'django_extensions',
+    # 'debug_toolbar',
+    # local apps
     'main',
 ]
 
 MIDDLEWARE = [
+    # third
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # django
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,3 +137,11 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'postImg')
 MEDIA_URL = '/postImg/'
+
+# INTERNAL_IPS = [
+#     # ...
+#     '127.0.0.1',
+#     # ...
+# ]
+
+AUTH_USER_MODEL = 'auth.User'
