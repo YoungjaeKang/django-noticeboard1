@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Post, Member
+from .models import Post, Member, Review
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -45,12 +45,12 @@ class MemberAdmin(admin.ModelAdmin):
     )
 
 
-# class ReviewAdmin(admin.ModelAdmin):
-#     list_display = (
-#         'comment',
-#     )
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = (
+        'comment',
+    )
 
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Member, MemberAdmin)
-# admin.site.register(Review, MemberAdmin)
+admin.site.register(Review, ReviewAdmin)

@@ -53,5 +53,12 @@ class Member(models.Model):
 class Review(models.Model):
     comment = models.CharField(max_length=300)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
+    # ForeignKey에서 limit_choices_to 로 권한 설정 가능. 예) ,limit_choices_to={'is_public': True}
+    # 이건 django form에서도 설정이 가능하다!
+    
     created = models.DateField(default=timezone.now(), null=True)
+
+
+    # Review.objects.filter(post_id=4)
+    # Review.objects.filter(post=post)
+    # post.review_set.all()
