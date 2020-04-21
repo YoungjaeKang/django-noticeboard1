@@ -159,6 +159,7 @@ def review_create(request, post_id):
         return redirect('post-detail', id=post_id)
     
     item = get_object_or_404(Post, pk=post_id)
+    # try except문으로 사용하기 번거로우니까 get_object_or_404로 간소화
     form = ReviewForm(initial={'post': item})
 
     return render(request, 'post-detail', {'form':form, 'item':item})
